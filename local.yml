@@ -42,9 +42,26 @@
         accept_hostkey: yes
         key_file: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
 
+    - name: Change ownership of dotfiles
+      file:
+        path: "{{ dotfiles_dest }}"
+        owner: "josh"
+        group: "josh"
+        recurse: yes
+
     - name: Configure Lightdm
       lineinfile:
         path: /etc/lightdm/lightdm.conf
         regexp: '^#?greeter-session='
         line: 'greeter-session=lightdm-slick-greeter'
         state: present
+
+    - name: Setup zsh
+      import_tasks: tasks/zsh.yml
+      vars:
+        ansible_become_user: "josh"
+
+    - name: Setup dotfiles
+      import_tasks: tasks/dotfiles.yml
+      vars:
+        ansible_become_user: "josh"

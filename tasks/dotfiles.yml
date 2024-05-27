@@ -1,0 +1,40 @@
+- name: Remove standard .zshrc
+  ansible.builtin.file:
+    path: ~/.zshrc
+    state: absent
+
+- name: Create .zshrc symbolic link
+  ansible.builtin.file:
+    src: ~/.dotfiles/zsh/.zshrc
+    dest: ~/.zshrc
+    state: link
+
+- name: Create nvim symbolic link
+  ansible.builtin.file:
+    src: ~/.dotfiles/kickstart.nvim
+    dest: ~/.config/nvim
+    state: link
+
+    #- name: Create tmux symbolic link
+    #  ansible.builtin.file:
+    #    src: ~/.dotfiles/tmux/.tmux.conf
+    #    dest: ~/.tmux.conf/
+    #    state: link
+
+- name: Create picom symbolic link
+  ansible.builtin.file:
+    src: ~/.dotfiles/picom/picom.conf
+    dest: ~/.config/picom.conf
+    state: link
+
+- name: Create kitty symbolic link
+  ansible.builtin.file:
+    src: ~/.dotfiles/kitty
+    dest: ~/.config/kitty
+    state: link
+
+- name: Create .Xresources symbolic link
+  ansible.builtin.file:
+    src: ~/.dotfiles/x/.Xresources
+    dest: ~/.Xresources
+    state: link
