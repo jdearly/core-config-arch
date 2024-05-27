@@ -20,7 +20,7 @@
       - tmux
       - zsh
     dotfiles_repo: "https://github.com/jdearly/dotfiles.git"
-    dotfiles_dest: "/home/josh/.dotfiles"
+    dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
   tasks:
     - name: Update and upgrade
       pacman:
@@ -45,8 +45,8 @@
     - name: Change ownership of dotfiles
       file:
         path: "{{ dotfiles_dest }}"
-        owner: "josh"
-        group: "josh"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
         recurse: yes
 
     - name: Configure Lightdm
@@ -59,9 +59,9 @@
     - name: Setup zsh
       import_tasks: tasks/zsh.yml
       vars:
-        ansible_become_user: "josh"
+        ansible_become_user: "{{ ansible_user }}"
 
     - name: Setup dotfiles
       import_tasks: tasks/dotfiles.yml
       vars:
-        ansible_become_user: "josh"
+        ansible_become_user: "{{ ansible_user }}"

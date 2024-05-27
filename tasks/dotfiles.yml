@@ -15,11 +15,11 @@
     dest: ~/.config/nvim
     state: link
 
-    #- name: Create tmux symbolic link
-    #  ansible.builtin.file:
-    #    src: ~/.dotfiles/tmux/.tmux.conf
-    #    dest: ~/.tmux.conf/
-    #    state: link
+- name: Create tmux symbolic link
+  ansible.builtin.file:
+   src: ~/.dotfiles/tmux/.tmux.conf
+   dest: ~/.tmux.conf
+   state: link
 
 - name: Create picom symbolic link
   ansible.builtin.file:
