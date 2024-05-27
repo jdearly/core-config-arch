@@ -7,7 +7,7 @@
       - base
       - base-devel
       - git
-      - vim
+      - neovim
       - networkmanager
       - network-manager-applet
       - lightdm
@@ -19,7 +19,7 @@
       - timeshift
       - tmux
       - zsh
-    dotfiles_repo: "https://github.com/jdearly/dotfiles.git"
+    dotfiles_repo: "git@github.com:jdearly/dotfiles.git"
     dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
   tasks:
     - name: Update and upgrade
