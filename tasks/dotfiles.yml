@@ -38,3 +38,9 @@
     src: ~/.dotfiles/x/.Xresources
     dest: ~/.Xresources
     state: link
+
+- name: Create awesome symbolic link
+  ansible.builtin.file:
+    src: ~/.dotfiles/awesome
+    dest: ~/.config/awesome
+    state: link
