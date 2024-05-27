@@ -1,0 +1,50 @@
+- name: Setup core system
+  hosts: localhost
+  become: yes
+  vars:
+    core_packages:
+      - awesome
+      - base
+      - base-devel
+      - git
+      - vim
+      - networkmanager
+      - network-manager-applet
+      - lightdm
+      - lightdm-slick-greeter
+      - openssh
+      - picom
+      - sudo
+      - rofi
+      - timeshift
+      - tmux
+      - zsh
+    dotfiles_repo: "https://github.com/jdearly/dotfiles.git"
+    dotfiles_dest: "/home/josh/.dotfiles"
+  tasks:
+    - name: Update and upgrade
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install core packages
+      pacman:
+        name: "{{ core_packages }}"
+        state: present
+    
+    - name: Clone dotfiles
+      git:
+        repo: "{{ dotfiles_repo }}"
+        dest: "{{ dotfiles_dest }}"
+        update: yes
+        force: yes
+        recursive: yes
+        accept_hostkey: yes
+        key_file: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
+
+    - name: Configure Lightdm
+      lineinfile:
+        path: /etc/lightdm/lightdm.conf
+        regexp: '^#?greeter-session='
+        line: 'greeter-session=lightdm-slick-greeter'
+        state: present
