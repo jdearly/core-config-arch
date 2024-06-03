@@ -7,17 +7,18 @@
       - base
       - base-devel
       - git
-      - neovim
-      - networkmanager
-      - network-manager-applet
       - lightdm
       - lightdm-slick-greeter
+      - neovim
+      - network-manager-applet
+      - networkmanager
       - openssh
       - picom
-      - sudo
       - rofi
+      - sudo
       - timeshift
       - tmux
+      - xclip
       - zsh
     dotfiles_repo: "git@github.com:jdearly/dotfiles.git"
     dotfiles_dest: "/home/{{ ansible_user }}/.dotfiles"
@@ -65,3 +66,6 @@
       import_tasks: tasks/dotfiles.yml
       vars:
         ansible_become_user: "{{ ansible_user }}"
+
+    - name: Install TPM
+      import_tasks: tasks/tmux.yml

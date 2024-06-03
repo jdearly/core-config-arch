@@ -27,12 +27,6 @@
     dest: ~/.config/picom.conf
     state: link
 
-- name: Create kitty symbolic link
-  ansible.builtin.file:
-    src: ~/.dotfiles/kitty
-    dest: ~/.config/kitty
-    state: link
-
 - name: Create .Xresources symbolic link
   ansible.builtin.file:
     src: ~/.dotfiles/x/.Xresources
