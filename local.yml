@@ -6,6 +6,8 @@
       - awesome
       - base
       - base-devel
+      - docker
+      - docker-compose
       - git
       - lightdm
       - lightdm-slick-greeter
